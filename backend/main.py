@@ -82,6 +82,13 @@ Tags: {', '.join(entry['tags']) if entry['tags'] else 'N/A'}
 
 Summary:
 """
-    output = llm.create(prompt=prompt, max_tokens=200, temperature=0.2)
+    # Generate the summary using the Llama model
+    output = llm(
+        prompt,
+        max_tokens=200,
+        temperature=0.2,
+        stop=["\n"],
+        echo=False
+    )
     summary = output["choices"][0]["text"].strip()
     return {"summary": summary}
